@@ -6,7 +6,8 @@
         <h2>{{book.title}}</h2>
         <p>{{book.description}}</p>
         <div>
-          <p>{{book.listPrice.isOnSale ? 'Price: ' + book.listPrice.amount : ''}}{{book.listPrice.isOnSale ? book.listPrice.currencyCode : ''}}</p>
+          <!-- <p>{{book.listPrice.isOnSale ? 'Price: ' + book.listPrice.amount : ''}}{{book.listPrice.isOnSale ? book.listPrice.currencyCode : ''}}</p> -->
+          <p>{{bookPrice}}</p>
           <span>Published at: {{book.publishedDate}}</span>
         </div>
       </div>
@@ -16,7 +17,7 @@
       <p>{{book.rating ? `This book has ${book.rating} stars` : 'No Rating yet'}}</p>
     </div>
     <BookRating
-      :grade="book.rating ? book.rating : 3"
+      :grade="book&& book.rating ? book.rating : 3"
       :maxStars="5"
       :hasCounter="true"
       :book="book"
@@ -37,6 +38,20 @@ export default {
     return {
       book: null
     };
+  },
+  computed: {
+    // a computed getter
+    bookPrice: function() {
+      let price = "";
+      if (this.book.listPrice.isOnSale) {
+        price =
+          "Price: " +
+          this.book.listPrice.amount +
+          this.book.listPrice.currencyCode;
+      }
+
+      return price;
+    }
   },
   async created() {
     const bookId = this.$route.params.id;
@@ -93,10 +108,29 @@ export default {
 }
 .book-details-container h2 {
   color: rgba(255, 255, 255, 0.459);
-  font-size: 45px;
+  font-size: 30px;
   margin-top: -10px;
   padding: 5px 0px;
   border-bottom: 1px solid rgba(92, 92, 92, 0.13);
+}
+
+@media only screen and (max-width: 800px) {
+  .book-details-container {
+    flex-direction: column-reverse !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .book-details-container h2 {
+    font-size: 25px !important;
+  }
+  .book-details-container span {
+    left: 0vw !important ;
+    bottom: 0px !important;
+  }
+  .book-details-container img {
+    width: 80%;
+  }
 }
 .book-details-container span {
   color: rgba(34, 34, 36, 0.692);

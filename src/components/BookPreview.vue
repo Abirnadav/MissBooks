@@ -80,6 +80,7 @@ export default {
   // height: 10vw;
   position: relative;
   width: 30vw;
+  min-width: 300px;
   background-color: rgba(0, 128, 0, 0.192);
   margin: 20px;
   border-radius: 10px;

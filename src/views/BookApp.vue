@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       filterBy: {
-        searchStr: "",
-      },
+        searchStr: ""
+      }
     };
   },
 
@@ -38,7 +38,7 @@ export default {
       let filter = this.filterBy;
       if (!filter.searchStr) return this.books;
       let bookToShow = [...this.books];
-      bookToShow = bookToShow.filter((book) => {
+      bookToShow = bookToShow.filter(book => {
         return book.title
           .toLowerCase()
           .includes(this.filterBy.searchStr.toLowerCase());
@@ -49,7 +49,7 @@ export default {
 
     books() {
       return this.$store.getters.books;
-    },
+    }
   },
 
   methods: {
@@ -59,13 +59,13 @@ export default {
 
     async loadBooks() {
       await this.$store.dispatch({ type: "loadBooks" });
-    },
+    }
   },
 
   components: {
     BooksList,
-    BookFilter,
-  },
+    BookFilter
+  }
 };
 </script>
 
@@ -84,5 +84,19 @@ export default {
   text-decoration: none;
   font-size: 25px;
   color: #4cd137;
+}
+
+@media only screen and (max-width: 600px) {
+  .open-add-modal {
+    top: 93vh !important;
+    position: fixed !important;
+    font-size: 15px;
+    z-index: 10;
+    color: white;
+    left: 1vw;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(53, 59, 72);
+  }
 }
 </style>

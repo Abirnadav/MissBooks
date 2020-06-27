@@ -75,7 +75,11 @@ export default {
 .book-edit img {
   margin-top: 50px;
 }
-
+@media only screen and (max-width: 800px) {
+  .book-edit input {
+    width: 90%;
+  }
+}
 .book-edit input {
   outline: none;
   padding: 10px;
